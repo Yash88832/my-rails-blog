@@ -28,7 +28,7 @@
 
         <div id="navbar-main-collapse" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><%#= link_to "Blog", posts_path %></li>     
+            <li><%= link_to "Blog", posts_path %></li>     
           </ul>
         </div>
       </div>
@@ -40,14 +40,6 @@
           <%= yield %>
         </div>
       </div>
-
-      <footer>
-        <ul class="list-inline">
-          <li class="pull-right"></li>
-
-          <li><%#= link_to "Blog", posts_path %></li>
-        </ul>
-      </footer>
     </div>
   </body>
 </html>
