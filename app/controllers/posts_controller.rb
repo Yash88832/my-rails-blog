@@ -1,26 +1,26 @@
 class PostsController < ApplicationController
 
-	# list all posts
+  # list all posts
  	def index
- 		@posts = Post.all
- 		@published = Post.published
- 		@archived = Post.archived
- 		@tags = Tag.includes(:posts)
+    @posts = current_user.posts
+    @published = @posts.published
+    @archived = @posts.archived
+    @tags = Tag.includes(:posts)
  	end
 
  	# find posts record
  	def show
- 		@post = Post.find(params[:id])
+    @post = Post.find(params[:id])
  	end
 
-	# GET /published/posts
+  # GET /published/posts
   def published
-    @posts = Post.published
+    @posts = current_user.posts.published
   end
 
   # GET /archived/posts
   def archived
-    @posts = Post.archived
+    @posts = current_user.posts.archived
   end
 
   # GET /posts/tags/name
