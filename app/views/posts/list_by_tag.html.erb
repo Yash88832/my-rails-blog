@@ -1,15 +1,30 @@
 <li><%= link_to "Blog", posts_path %></li>
 <li><%= @tag.name %></li>
-<% @posts.each do |post| %>
-  <div class="post">
-    <h2><%= link_to post.title, post_path(post) %></h2>
-
-    <div class="date">
-      <span class="glyphicon glyphicon-time"></span>
-      <%= post.published_date.strftime("%B %d, %Y") %>
+<div class="w3-content" style="max-width:1400px">
+  <!-- Grid -->
+  <div class="w3-row">
+    <!-- Blog entries -->
+    <div class="col-md-9">
+      <h3><b>Blogs List By Tags</b></h3>
+      <!-- Blog entry -->
+      <% @posts.zip(@image_index).each do |post, image| %>
+        <div class="w3-card-2 w3-white">
+          <%= image_tag "post-#{image.present? ? image : '1'}.jpg", alt:  "Nature", style:"width: 80%" %>
+          <div class="w3-container">
+            <h3><b><%= post.title %></b></h3>
+            <h5><span class="w3-opacity"><%= post.published_date.strftime("%b %d") %></span></h5>
+          </div>
+          <div class="w3-container">
+            <p></p>
+            <div class="w3-row">
+              <div class="w3-col m8 s12">
+                <b><%= link_to "Read more &rarr;".html_safe, post_path(post),class: "w3-button w3-padding-large w3-white w3-border" %></b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      <% end %>
     </div>
-
-    <p><%= post.snippet %></p>
-    <%= link_to "Read more &rarr;".html_safe, post_path(post) %>
   </div>
-<% end %>
+</div>

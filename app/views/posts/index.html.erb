@@ -1,50 +1,57 @@
-<li>Blog</li>
-<div class="row">
- <div class="col-md-9">
-   <div class="blog">
-    <% if @posts.any? %>
-      <% @posts.each do |post| %>
-        <div class="post">
-          <h2><%= link_to post.title, post_path(post) %></h2>
-
-          <div class="date">
-            <span class="glyphicon glyphicon-time"></span>
-            <%= post.published_date.strftime("%B %d, %Y") %>
+<div class="w3-content" style="max-width:1400px">
+  <!-- Grid -->
+  <div class="w3-row">
+    <!-- Blog entries -->
+    <div class="col-md-9">
+      <!-- Blog entry -->
+      <% if @posts.any? %>
+        <% @posts.zip(@image_index).each do |post, image| %>
+          <div class="w3-card-2 w3-white">
+            <%= image_tag "post-#{image.present? ? image : '1'}.jpg", alt:  "Nature", style:"width: 80%" %>
+            <div class="w3-container">
+              <h3><b><%= post.title %></b></h3>
+              <h5><%= post.snippet %>, <span class="w3-opacity"><%= post.published_date.strftime("%B %d, %Y") %></span></h5>
+            </div>
+            <div class="w3-container">
+              <p></p>
+              <div class="w3-row">
+                <div class="w3-col m8 s12">
+                  <b><%= link_to "Read more &rarr;".html_safe, post_path(post),class: "w3-button w3-padding-large w3-white w3-border" %></b></p>
+                </div>
+                <div class="w3-col m4 w3-hide-small">
+                  <p><span class="w3-padding-large w3-right"><b>Total Tags </b> <span class="w3-tag"><%= post.tags.count %></span></span></p>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <p><%= post.snippet.html_safe %></p>
-
-          <%= link_to "Read more &rarr;".html_safe, post_path(post) %>
-        </div>
-      <% end %>
-    <% else %>
-      <h1>Blog</h1>
-      <p>No posts yet.</p>
-    <% end %>
-   </div>
-  </div>
-
-  <div class="col-md-3">
-    <div class="portlet">
-     <h3>Published Blogs</h3>
-      <% if @published.present? %>
-       <ul>
-         <li><%= link_to "Published Blogs", published_posts_path %></li>
-       <ul>
+          <hr>
+        <% end %>
+      <% else %>
+        <h1>Blog</h1>
+        <p>No posts yet.</p>
       <% end %>
     </div>
 
-    <div class="portlet">
-     <h3>Archived Blogs</h3>
-      <% if @archived.present? %>
-       <ul>
-         <li><%= link_to "Archived Blogs", archived_posts_path %></li>
-       <ul>
-      <% end %>
-    </div>
+    <div class="col-md-3">
+      <div class="portlet">
+       <h3>Published Blogs</h3>
+        <% if @published.present? %>
+         <ul>
+           <li><%= link_to "Published Blogs", published_posts_path %></li>
+         <ul>
+        <% end %>
+      </div>
 
-   <%# if !post_tags.empty? %>
-     <div class="portlet">
+      <div class="portlet">
+       <h3>Archived Blogs</h3>
+        <% if @archived.present? %>
+         <ul>
+           <li><%= link_to "Archived Blogs", archived_posts_path %></li>
+         <ul>
+        <% end %>
+      </div>
+
+      <div class="portlet">
        <h3>Tags</h3>
 
        <ul>
@@ -52,8 +59,8 @@
           <li><%= link_to tag.name, list_by_tag_post_path(tag) %></a></li>
         <% end %>
        <ul>
-     </div>
-   <%# end %>
+      </div>
+
+    </div>
   </div>
 </div>
-

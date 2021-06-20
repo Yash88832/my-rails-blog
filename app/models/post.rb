@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   STATUS_DRAFT = "Draft"
   STATUS_PUBLISHED = "Published"
   STATUS_ARCHIVED = "Archived"
+  IMAGE_INDEX = [1, 2, 3, 3, 2, 1, 1, 2, 3, 3, 2, 1]
   # => Associations
   belongs_to :user, optional:true
   has_many :post_tags
